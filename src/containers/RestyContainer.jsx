@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import HistorySidebar from '../HistorySidebar';
-import FormInput from '../FormInput';
-import HeroJSON from '../HeroJSON';
-import fetchRequest from '../../fetchUtils';
+import HistorySidebar from '../components/HistorySidebar';
+import FormInput from '../components/FormInput';
+import HeroJSON from '../components/HeroJSON';
+import fetchRequest from '../services/fetchUtils';
 
-import styles from '../../styles/RestyContainer.module.css';
+import styles from '../styles/RestyContainer.module.css';
 
 class RestyContainer extends Component {
     state = {

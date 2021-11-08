@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import ParamsItem from '../ParamsItem';
+import ParamsItem from '../components/ParamsItem';
 import PropTypes from 'prop-types';
-import styles from '../../styles/ParamsContainer.module.css';
+import styles from '../styles/ParamsContainer.module.css';
 
 class ParamsContainer extends Component {
     state = {

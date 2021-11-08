@@ -1,16 +1,14 @@
 import React from 'react';
 import styles from '../styles/FormInput.module.css';
 import PropTypes from 'prop-types';
-import ParamsContainer from './containers/ParamsContainer';
+import ParamsContainer from '../containers/ParamsContainer';
 import MethodButton from './MethodButton';
 
 // I might want to refactor how the method selection works,
 // but I needed to get this working and don't feel like dealing
 // with React / select / radio input problems right now. I'm
-// going to look into react-select later. Styling the buttons based
-// on state is awkward, but it's reliable and I know I
-// can make it work without any hassle. On the other hand, it just
-// works, and it was really easy.
+// going to look into react-select later. For now, it's reliable and I know I
+// can make it work without any hassle.
 
 function FormInput(props) {
     const {
@@ -49,7 +47,7 @@ function FormInput(props) {
                     onChange={(e) => handleChange(e, 'url')}
                 />
                 <label htmlFor="raw-json-body">Raw JSON body</label>
-                <input
+                <textarea
                     type="text"
                     name="raw-json-body"
                     value={body}

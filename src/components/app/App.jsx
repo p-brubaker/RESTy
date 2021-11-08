@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../Header';
-import RestyContainer from '../containers/RestyContainer';
+import RestyContainer from '../../containers/RestyContainer';
 
 export default function App() {
     return (
