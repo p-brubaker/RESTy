@@ -2,6 +2,15 @@ import React from 'react';
 import styles from '../styles/FormInput.module.css';
 import PropTypes from 'prop-types';
 import ParamsContainer from './containers/ParamsContainer';
+import MethodButton from './MethodButton';
+
+// I might want to refactor how the method selection works,
+// but I needed to get this working and don't feel like dealing
+// with React / select / radio input problems right now. I'm
+// going to look into react-select later. Styling the buttons based
+// on state is awkward, but it's reliable and I know I
+// can make it work without any hassle. On the other hand, it just
+// works, and it was really easy.
 
 function FormInput(props) {
     const {
@@ -19,62 +28,17 @@ function FormInput(props) {
     return (
         <div className={styles['form-input-container']}>
             <label htmlFor="method">Method</label>
-            <div name="method">
-                <button
-                    style={
-                        method === 'GET'
-                            ? styles['selected']
-                            : styles['not-selected']
-                    }
-                    value="GET"
-                    onClick={(e) => handleChange(e, 'method')}
-                >
-                    GET
-                </button>
-                <button
-                    value="POST"
-                    onClick={(e) => handleChange(e, 'method')}
-                    style={
-                        method === 'POST'
-                            ? styles['selected']
-                            : styles['not-selected']
-                    }
-                >
-                    POST
-                </button>
-                <button
-                    value="PUT"
-                    onClick={(e) => handleChange(e, 'method')}
-                    style={
-                        method === 'PUT'
-                            ? styles['selected']
-                            : styles['not-selected']
-                    }
-                >
-                    PUT
-                </button>
-                <button
-                    value="PATCH"
-                    onClick={(e) => handleChange(e, 'method')}
-                    style={
-                        method === 'PATCH'
-                            ? styles['selected']
-                            : styles['not-selected']
-                    }
-                >
-                    PATCH
-                </button>
-                <button
-                    value="DELETE"
-                    onClick={(e) => handleChange(e, 'method')}
-                    style={
-                        method === 'DELETE'
-                            ? styles['selected']
-                            : styles['not-selected']
-                    }
-                >
-                    DELETE
-                </button>
+            <div name="method-select">
+                {['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].map((str) => {
+                    return (
+                        <MethodButton
+                            key={str}
+                            handleChange={handleChange}
+                            selected={method}
+                            method={str}
+                        />
+                    );
+                })}
             </div>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="url">URL</label>
@@ -91,8 +55,9 @@ function FormInput(props) {
                     value={body}
                     onChange={(e) => handleChange(e, 'body')}
                 />
-                <label
-                    htmlFor="token-input"
+                <label htmlFor="token-input">token:</label>
+                <input
+                    name="token-input"
                     value={token}
                     onChange={(e) => handleChange(e, 'token')}
                 />
