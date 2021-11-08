@@ -1,4 +1,4 @@
-import fetchRequest from '../src/fetchUtils.js';
+import fetchRequest from '../src/services/fetchUtils.js';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
 
