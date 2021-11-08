@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-async function fetchRequest({ url, params, method, body, auth }) {
+async function fetchRequest({ url, params, method, body, token }) {
     if (params) {
         url = new URL(url);
         url.search = new URLSearchParams(params).toString();
@@ -7,10 +7,10 @@ async function fetchRequest({ url, params, method, body, auth }) {
 
     const res = await fetch(url, {
         method,
-        headers: auth
+        headers: token
             ? {
                   'Content-Type': 'application/json',
-                  Authorization: auth.token,
+                  Authorization: token,
               }
             : {
                   'Content-Type': 'application/json',
