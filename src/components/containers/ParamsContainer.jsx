@@ -9,9 +9,9 @@ class ParamsContainer extends Component {
         value: '',
     };
 
-    handleChange(e, field) {
+    handleChange = (e, field) => {
         this.setState({ [field]: e.target.value });
-    }
+    };
 
     render() {
         const { key, value } = this.state;
@@ -19,7 +19,7 @@ class ParamsContainer extends Component {
 
         return (
             <div className={styles['params-container']}>
-                <button onClick={handleAddParams(key, value)}>ADD</button>
+                <button onClick={() => handleAddParams(key, value)}>ADD</button>
                 <label htmlFor="key">key:</label>
                 <input
                     id="key"
@@ -34,11 +34,11 @@ class ParamsContainer extends Component {
                     value={value}
                     onChange={(e) => this.handleChange(e, 'value')}
                 />
-                {params ? (
+                {params.length ? (
                     params.map((pair) => (
                         <ParamsItem
-                            params={pair}
-                            key={params.key}
+                            pair={{ key: pair.key, value: pair.value }}
+                            key={pair.key}
                             handleRemoveParam={handleRemoveParam}
                         />
                     ))
@@ -53,7 +53,7 @@ class ParamsContainer extends Component {
 ParamsContainer.propTypes = {
     handleAddParams: PropTypes.func.isRequired,
     handleRemoveParam: PropTypes.func.isRequired,
-    params: PropTypes.object,
+    params: PropTypes.array.isRequired,
 };
 
 export default ParamsContainer;

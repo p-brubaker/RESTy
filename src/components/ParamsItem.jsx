@@ -2,21 +2,20 @@ import React from 'react';
 import styles from '../styles/ParamsItem.module.css';
 import PropTypes from 'prop-types';
 
-function ParamsItem() {
-    const { key, value, handleRemoveParam } = this.props;
+function ParamsItem(props) {
+    const { pair, handleRemoveParam } = props;
     return (
         <div className={styles['params-item']}>
-            <button onClick={handleRemoveParam(key)}>X</button>
+            <button onClick={() => handleRemoveParam(pair.key)}>X</button>
             <p>
-                key: {key} value: {value}
+                key: {pair.key} value: {pair.value}
             </p>
         </div>
     );
 }
 
 ParamsItem.propTypes = {
-    key: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
+    pair: PropTypes.object.isRequired,
     handleRemoveParam: PropTypes.func.isRequired,
 };
 
