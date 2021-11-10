@@ -18,6 +18,10 @@ class RestyContainer extends Component {
         token: '',
     };
 
+    componentDidMount() {
+        this.setState({ history: historyApi.get() || [] });
+    }
+
     handleChange = (e, field) => {
         this.setState({ [field]: e.target.value });
     };
@@ -25,6 +29,7 @@ class RestyContainer extends Component {
     handleSubmit = async (e) => {
         e.preventDefault();
         const { history, url, body, method, params, token } = this.state;
+
         const optional = {};
         if (body) optional.body = body;
         if (token) optional.token = token;
@@ -32,13 +37,17 @@ class RestyContainer extends Component {
             optional.params = params.map((pair) => {
                 return [pair.key, pair.value];
             });
+
         const json = await fetchRequest({ url, method, ...optional });
         this.setState({ response: json });
-        const newHistory = history.length
-            ? [...history, { url, method }]
-            : [{ url, method }];
-        this.setState({ history: newHistory });
-        historyApi.set(newHistory);
+
+        if (!historyApi.has(method, url)) {
+            const newHistory = history.length
+                ? [...history, { url, method }]
+                : [{ url, method }];
+            this.setState({ history: newHistory });
+            historyApi.set(newHistory);
+        }
     };
 
     handleAddParams = (key, value) => {

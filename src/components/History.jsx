@@ -9,7 +9,7 @@ function History({ history, handleGetHistoryItem }) {
                 history.map((item, index) => {
                     return (
                         <HistoryItem
-                            key={item.url + Date.now()}
+                            key={item.method + item.url}
                             url={item.url}
                             method={item.method}
                             index={index}
