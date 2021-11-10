@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import HistorySidebar from '../components/HistorySidebar';
+import History from '../components/History';
 import FormInput from '../components/FormInput';
 import HeroJSON from '../components/HeroJSON';
 import fetchRequest from '../services/fetchUtils';
+import historyApi from '../services/historyApi';
 
 import styles from '../styles/RestyContainer.module.css';
 
 class RestyContainer extends Component {
     state = {
+        history: [],
         url: '',
         body: '',
         response: {},
@@ -22,7 +24,7 @@ class RestyContainer extends Component {
 
     handleSubmit = async (e) => {
         e.preventDefault();
-        const { url, body, method, params, token } = this.state;
+        const { history, url, body, method, params, token } = this.state;
         const optional = {};
         if (body) optional.body = body;
         if (token) optional.token = token;
@@ -32,6 +34,11 @@ class RestyContainer extends Component {
             });
         const json = await fetchRequest({ url, method, ...optional });
         this.setState({ response: json });
+        const newHistory = history.length
+            ? [...history, { url, method }]
+            : [{ url, method }];
+        this.setState({ history: newHistory });
+        historyApi.set(newHistory);
     };
 
     handleAddParams = (key, value) => {
@@ -46,13 +53,23 @@ class RestyContainer extends Component {
         }));
     };
 
+    handleGetHistoryItem = (index) => {
+        const historyItem = historyApi.choose(index);
+        this.setState({ url: historyItem.url, method: historyItem.method });
+    };
+
     render() {
-        const { url, method, body, response, token, params } = this.state;
+        const { history, url, method, body, response, token, params } =
+            this.state;
         return (
             <div className={styles['resty-container']}>
-                <HistorySidebar />
+                <History
+                    history={history}
+                    handleGetHistoryItem={this.handleGetHistoryItem}
+                />
                 <section className="right-section">
                     <FormInput
+                        history={history}
                         method={method}
                         url={url}
                         body={body}
