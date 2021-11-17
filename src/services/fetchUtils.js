@@ -1,4 +1,5 @@
 /* eslint-disable indent */
+// Hi
 async function fetchRequest({ url, params, method, body, token }) {
     if (params) {
         url = new URL(url);

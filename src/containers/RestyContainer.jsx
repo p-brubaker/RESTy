@@ -42,9 +42,7 @@ class RestyContainer extends Component {
         this.setState({ response: json });
 
         if (!historyApi.has(method, url)) {
-            const newHistory = history.length
-                ? [...history, { url, method }]
-                : [{ url, method }];
+            const newHistory = [...history, { url, method }];
             this.setState({ history: newHistory });
             historyApi.set(newHistory);
         }
