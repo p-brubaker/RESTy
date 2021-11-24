@@ -70,10 +70,12 @@ class RestyContainer extends Component {
             this.state;
         return (
             <div className={styles['resty-container']}>
-                <History
-                    history={history}
-                    handleGetHistoryItem={this.handleGetHistoryItem}
-                />
+                <section className={styles['history']}>
+                    <History
+                        history={history}
+                        handleGetHistoryItem={this.handleGetHistoryItem}
+                    />
+                </section>
                 <section className="right-section">
                     <FormInput
                         history={history}
