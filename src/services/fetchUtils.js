@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-// Hi
+
 async function fetchRequest({ url, params, method, body, token }) {
     // if (params) {
     //     url = new URL(url);
@@ -21,7 +21,7 @@ async function fetchRequest({ url, params, method, body, token }) {
 
     // const data = await res.json();
     // return data;
-    const res = await fetch('https://proxy-fetch.herokuapp.com/', {
+    const res = await fetch('https://glacial-journey-79252.herokuapp.com/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
