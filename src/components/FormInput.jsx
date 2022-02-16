@@ -4,12 +4,6 @@ import PropTypes from 'prop-types';
 import ParamsContainer from '../containers/ParamsContainer';
 import MethodButton from './MethodButton';
 
-// I might want to refactor how the method selection works,
-// but I needed to get this working and don't feel like dealing
-// with React / select / radio input problems right now. I'm
-// going to look into react-select later. For now, it's reliable and I know I
-// can make it work without any hassle.
-
 function FormInput(props) {
     const {
         method,
@@ -25,7 +19,7 @@ function FormInput(props) {
 
     return (
         <div className={styles['form-input-container']}>
-            <label htmlFor="method">Method</label>
+            <label htmlFor="method-select">Method</label>
             <div name="method-select">
                 {['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].map((str) => {
                     return (
@@ -38,7 +32,10 @@ function FormInput(props) {
                     );
                 })}
             </div>
-            <form onSubmit={handleSubmit}>
+            <form
+                onSubmit={handleSubmit}
+                style={{ display: 'flex', flexDirection: 'column' }}
+            >
                 <label htmlFor="url">URL</label>
                 <input
                     name="url"
