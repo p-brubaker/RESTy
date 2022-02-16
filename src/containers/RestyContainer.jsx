@@ -42,9 +42,7 @@ class RestyContainer extends Component {
         this.setState({ response: json });
 
         if (!historyApi.has(method, url)) {
-            const newHistory = history.length
-                ? [...history, { url, method }]
-                : [{ url, method }];
+            const newHistory = [...history, { url, method }];
             this.setState({ history: newHistory });
             historyApi.set(newHistory);
         }
@@ -72,10 +70,12 @@ class RestyContainer extends Component {
             this.state;
         return (
             <div className={styles['resty-container']}>
-                <History
-                    history={history}
-                    handleGetHistoryItem={this.handleGetHistoryItem}
-                />
+                <section className={styles['history']}>
+                    <History
+                        history={history}
+                        handleGetHistoryItem={this.handleGetHistoryItem}
+                    />
+                </section>
                 <section className="right-section">
                     <FormInput
                         history={history}

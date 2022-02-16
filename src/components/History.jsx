@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 function History({ history, handleGetHistoryItem }) {
     return (
         <>
-            {history ? (
+            {history.length ? (
                 history.map((item, index) => {
                     return (
                         <HistoryItem
